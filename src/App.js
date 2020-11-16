@@ -11,6 +11,8 @@ const App = () => {
     setCount(count - 1);
   };
 
+  //関数を引数に渡す
+  //previousCount・・・現時点の値
   const increment2 = () => {
     setCount((previousCount) => previousCount + 1);
   };
