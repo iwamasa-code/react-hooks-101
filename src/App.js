@@ -1,67 +1,43 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const App = () => {
-  const [count, setCount] = useState(0);
-
-  const increment = () => {
-    setCount(count + 1);
+  const initialStates = {
+    name: "",
+    price: 1000,
   };
-
-  const decrement = () => {
-    setCount(count - 1);
-  };
-
-  //関数を引数に渡す
-  //previousCount・・・現時点の値
-  const increment2 = () => {
-    setCount((previousCount) => previousCount + 1);
-  };
-
-  const decrement2 = () => {
-    setCount((previousCount) => previousCount - 1);
-  };
+  const [name, setName] = useState(initialStates.name);
+  const [price, setPrice] = useState(initialStates.price);
 
   const reset = () => {
-    setCount(0);
+    setPrice(initialStates.price);
+    setName(initialStates.name);
   };
 
-  const double = () => {
-    setCount(count * 2);
-  };
+  useEffect(() => {
+    console.log("useEffect");
+  });
 
-  const divide = () =>
-    setCount((previousCount) => {
-      if (previousCount % 3 === 0) {
-        return previousCount / 3;
-      } else {
-        return previousCount;
-      }
-    });
+  useEffect(() => {
+    console.log("This is like componentDidMount");
+  }, []);
 
-  //三項演算子
-  // const divide = () =>
-  //   setCount((previousCount) => {
-  //     return previousCount % 3 === 0 ? previousCount / 3 : previousCount;
-  //   });
+  useEffect(() => {
+    console.log("This callback is for name only");
+  }, [name]);
 
   return (
     <>
-      <div>count: {count}</div>
-      <div>
-        <button onClick={increment}>+1</button>
-        <button onClick={decrement}>-1</button>
-      </div>
-      <div>
-        <button onClick={increment2}>+1</button>
-        <button onClick={decrement2}>-1</button>
-      </div>
-      <div>
-        <button onClick={reset}>Reset</button>
-        <button onClick={double}>×2</button>
-        <button onClick={divide}>3の倍数の時だけ3で割る</button>
-      </div>
+      <p>
+        今の{name}の所持金は、{price}円です。
+      </p>
+      <button onClick={() => setPrice(price + 1)}>+1</button>
+      <button onClick={() => setPrice(price - 1)}>-1</button>
+      <button onClick={reset}>Reset</button>
+      <input value={name} onChange={(e) => setName(e.target.value)} />
     </>
   );
 };
 
 export default App;
+
+//useEffectはJSXのレンダリングのあとで実行される。
