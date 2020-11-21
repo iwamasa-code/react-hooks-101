@@ -1,4 +1,4 @@
-import { CREATE_EVENT, DELETE_EVENT, DELETE_ALL_EVENTS } from "../actions";
+import { CREATE_EVENT, DELETE_EVENT, DELETE_ALL_EVENT } from "../actions";
 
 const events = (state = [], action) => {
   switch (action.type) {
@@ -9,7 +9,7 @@ const events = (state = [], action) => {
       return [...state, { id, ...event }];
     case DELETE_EVENT:
       return state.filter((event) => event.id !== action.id);
-    case DELETE_ALL_EVENTS:
+    case DELETE_ALL_EVENT:
       return [];
     default:
       return state;
